@@ -1,0 +1,2 @@
+rootProject.name='Winding'
+include ':app'

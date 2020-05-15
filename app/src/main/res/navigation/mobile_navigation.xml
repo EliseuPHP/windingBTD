@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="br.unicamp.ft.e215293.Winding.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/arestaHM"
+            app:destination="@id/musicsFragment" />
+        <action
+            android:id="@+id/arestaHA"
+            app:destination="@id/artistFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="br.unicamp.ft.e215293.Winding.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="br.unicamp.ft.e215293.Winding.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/musicsFragment"
+        android:name="br.unicamp.ft.e215293.Winding.MusicsFragment"
+        android:label="Musicas"
+        tools:layout="@layout/fragment_musics" >
+        <argument
+            android:name="data"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="defaultVal" />
+        <action
+            android:id="@+id/arestaMS"
+            app:destination="@id/musicSelectedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="br.unicamp.ft.e215293.Winding.ArtistFragment"
+        android:label="Artistas"
+        tools:layout="@layout/fragment_artist" >
+        <action
+            android:id="@+id/aresta"
+            app:destination="@id/musicsFragment" />
+        <argument
+            android:name="data"
+            app:argType="string"
+            android:defaultValue="defaultVal" />
+    </fragment>
+    <fragment
+        android:id="@+id/musicSelectedFragment"
+        android:name="br.unicamp.ft.e215293.Winding.MusicSelectedFragment"
+        android:label="Musica"
+        tools:layout="@layout/fragment_music_selected">
+        <argument
+            android:name="nome"
+            android:defaultValue="defaultVal"
+            app:argType="string" />
+        <argument
+            android:name="art"
+            android:defaultValue="defaultVal"
+            app:argType="string" />
+    </fragment>
+</navigation>

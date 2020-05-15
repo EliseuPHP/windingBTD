@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    tools:context=".MusicSelectedFragment">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/cover"
+        android:padding="2dp" />
+
+    <TextView
+        android:id="@+id/nome_art"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view"
+        android:layout_centerHorizontal="true"
+        android:text="@string/hello_blank_fragment"
+        android:textColor="#5A5E83"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/nome_mus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nome_art"
+        android:layout_centerHorizontal="true"
+        android:text="@string/hello_blank_fragment"
+        android:textColor="#1A237E"
+        android:textStyle="bold"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/nome_gen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nome_mus"
+        android:layout_centerHorizontal="true"
+        android:text="@string/hello_blank_fragment"
+        android:textColor="#5A5E83"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/nome_letra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nome_gen"
+        android:layout_centerHorizontal="true"
+        android:text="@string/hello_blank_fragment"
+        android:textSize="20sp" />
+
+</RelativeLayout>

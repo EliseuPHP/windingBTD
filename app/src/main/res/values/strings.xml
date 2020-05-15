@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">Winding</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+
+    <array name="fotosAlbum">
+        <item>@drawable/beatles_one</item>
+        <item>@drawable/thriller</item>
+    </array>
+
+    <array name="fotosArtistas">
+        <item>@drawable/beatles</item>
+        <item>@drawable/michael_jackson</item>
+    </array>
+
+    <string-array name="artists">
+        <item>The Beatles</item>
+        <item>Michael Jackson</item>
+    </string-array>
+
+    <string-array name="genre">
+        <item>Rock</item>
+        <item>Pop</item>
+    </string-array>
+
+    <string-array name="musics">
+        <item>Love Me Do,1,0,0,0,Love love me do</item>
+        <item>From Me to You,2,0,0,0,From Me to You</item>
+        <item>She Loves You,2,0,0,0,She Loves You Yeah Yeah Yeah</item>
+        <item>I Want to Hold Your Hand,4,0,0,0,Its such a feeling that my love I cant hide</item>
+        <item>Cant Buy Me Love,5,0,0,0,I bought you diamond rings my friend</item>
+        <item>A Hard Days Night,6,0,0,0,Its been a hard Days night</item>
+        <item>I Feel Fine,7,0,0,0,shes my little girl</item>
+        <item>Eight Days a Week,8,0,0,0,Eight Days a Week</item>
+        <item>Ticket to Ride,9,0,0,0,Shes gotta a Ticket to Ride</item>
+        <item>Help!,10,0,0,0,I need somebody help</item>
+        <item>Yesterday,11,0,0,0,All my troubles seems so far away</item>
+        <item>Day Tripper,12,0,0,0,Day Tripper</item>
+        <item>We Can Work It Out,13,0,0,0,Life is very short</item>
+        <item>Paperback Writer,14,0,0,0,Paperback Writer</item>
+        <item>Yellow Submarine,15,0,0,0,We all live in a yellow submarine</item>
+        <item>Eleanor Rigby,16,0,0,0,I look at all the lonely people</item>
+        <item>Penny Lane,17,0,0,0,In penny lane there was a barber shop</item>
+        <item>All You Need Is Love,18,0,0,0,All you need is love</item>
+        <item>Hello Goodbye,19,0,0,0,You say yes</item>
+        <item>Lady Madonna,20,0,0,0,Lady madonna children at your feet</item>
+        <item>Hey Jude,21,0,0,0,Dont make it bad</item>
+        <item>Get Back,22,0,0,0,Jojo was a man</item>
+        <item>The Ballad of John and Yoko,23,0,0,0,The Ballad of John and Yoko</item>
+        <item>Something,24,0,0,0,Something in the way she moves</item>
+        <item>Come Together,25,0,0,0,Right now over me</item>
+        <item>Let It Be,26,0,0,0,When I find myself in times of trouble</item>
+        <item>The Long and Winding Road,27,0,0,0,The Long and Winding Road</item>
+        <item>Billie Jean,6,1,1,1,She was more like a beauty queen</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cover">Cover do Album</string>
+    <string name="texto_nome">%s</string>
+    <string name="texto_track">%d</string>
+    <string name="texto_gen">%s</string>
+    <string name="music">Musicas</string>
+    <string name="artist">Artistas</string>
+    <string name="btn_search">Buscar</string>
+</resources>
