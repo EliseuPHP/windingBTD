@@ -41,23 +41,28 @@ public class HomeFragment extends Fragment {
         view.findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selected = radioGroup.getCheckedRadioButtonId();
-                final RadioButton radioButton = (RadioButton) view.findViewById(selected);
-                if (radioButton.getText().toString().equals(getString(R.string.music))) {
-                    //buscar musica
-                    Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
-                    Bundle bundle = new Bundle();
-                    bundle.putString("data", searchText.getText().toString());
-                    NavController navController = NavHostFragment.findNavController(HomeFragment.this);
-                    navController.navigate(R.id.arestaHM, bundle);
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
 
-                } else if (radioButton.getText().toString().equals(getString(R.string.artist))) {
-                    //buscar artista
-                    Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.artist) + "|" + searchText.getText().toString());
-                    Bundle bundle = new Bundle();
-                    bundle.putString("data", searchText.getText().toString());
-                    NavController navController = NavHostFragment.findNavController(HomeFragment.this);
-                    navController.navigate(R.id.arestaHA, bundle);
+                } else {
+                    selected = radioGroup.getCheckedRadioButtonId();
+                    final RadioButton radioButton = (RadioButton) view.findViewById(selected);
+
+                    if (radioButton.getText().toString().equals(getString(R.string.music))) {
+                        //buscar musica
+                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
+                        Bundle bundle = new Bundle();
+                        bundle.putString("data", searchText.getText().toString());
+                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+                        navController.navigate(R.id.arestaHM, bundle);
+
+                    } else if (radioButton.getText().toString().equals(getString(R.string.artist))) {
+                        //buscar artista
+                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.artist) + "|" + searchText.getText().toString());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("data", searchText.getText().toString());
+                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+                        navController.navigate(R.id.arestaHA, bundle);
+                    }
                 }
             }
         });
