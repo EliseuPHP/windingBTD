@@ -132,7 +132,8 @@ public class Music {
             String[] infos = context.getResources().getStringArray(R.array.musics);
             String[] genero = context.getResources().getStringArray(R.array.genre);
             String[] artista = context.getResources().getStringArray(R.array.artists);
-            TypedArray fotos = context.getResources().obtainTypedArray(R.array.fotosAlbum);
+            String[] letra = context.getResources().getStringArray(R.array.lyrics);
+            TypedArray fotos = context.getResources().obtainTypedArray(R.array.fotosAlbumLarge);
             ArrayList<Music> musics = new ArrayList<>();
 
             for (String s : infos) {
@@ -145,7 +146,7 @@ public class Music {
                                 fotos.getResourceId(Integer.parseInt(info[2]), 0),
                                 genero[Integer.parseInt(info[3])],
                                 artista[Integer.parseInt(info[4])],
-                                info[5]);
+                                letra[Integer.parseInt(info[5])]);
                     };
                 }
 

@@ -1,50 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_marginTop="16dp"
+    android:background="#AFAFAF"
+    android:paddingEnd="16dp">
 
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/cover"
-        android:padding="2dp" />
+        android:contentDescription="@string/cover" />
 
-    <GridLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/image_view">
 
         <TextView
             android:id="@+id/text_view_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
             android:textAlignment="textStart"
             android:textColor="#333342"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/text_view_track"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_marginStart="8dp"
-            android:textAlignment="textStart"
-            android:textColor="#333342"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_view_gen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:layout_marginStart="8dp"
+            android:layout_below="@id/text_view_nome"
+            android:layout_marginBottom="4dp"
             android:textAlignment="textStart"
             android:textColor="#333342"
             android:textSize="20sp" />
@@ -53,12 +43,9 @@
             android:id="@+id/text_view_art"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_row="3"
-            android:layout_column="0"
-            android:layout_marginStart="8dp"
+            android:layout_below="@id/text_view_gen"
             android:textAlignment="textStart"
             android:textColor="#333342"
             android:textSize="20sp" />
-
-    </GridLayout>
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,49 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/search_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <RadioGroup
-        android:id="@+id/radio_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/radio_artist"
+        <TextView
+            android:id="@+id/text_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/artist" />
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/search_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"/>
 
-        <RadioButton
-            android:id="@+id/radio_music"
+        <EditText
+            android:id="@+id/search_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/music" />
-    </RadioGroup>
+            app:layout_constraintBottom_toTopOf="@id/radio_select"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_home" />
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_search" />
-</LinearLayout>
+        <RadioGroup
+            android:id="@+id/radio_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/btn_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_1"
+            android:orientation="horizontal"
+            >
+
+            <RadioButton
+                android:id="@+id/radio_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/radio_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radio_select" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+    <!--android:id="@+id/text_home"-->
+    <!--android:id="@+id/search_1"-->
+    <!--android:id="@+id/radio_select"-->
+    <!--android:id="@+id/radio_artist"-->
+    <!--android:id="@+id/radio_music"-->
+    <!--android:id="@+id/btn_search"-->

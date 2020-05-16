@@ -69,7 +69,7 @@ public class MusicAdapter extends RecyclerView.Adapter {
 
         private ImageView imageView;
         private TextView textViewNome;
-        private TextView textViewTrack;
+        //private TextView textViewTrack;
         private TextView textViewGen;
         private TextView textViewArt;
         private int posicao;
@@ -78,7 +78,7 @@ public class MusicAdapter extends RecyclerView.Adapter {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_view);
             textViewNome = itemView.findViewById(R.id.text_view_nome);
-            textViewTrack = itemView.findViewById(R.id.text_view_track);
+            //textViewTrack = itemView.findViewById(R.id.text_view_track);
             textViewGen = itemView.findViewById(R.id.text_view_gen);
             textViewArt = itemView.findViewById(R.id.text_view_art);
         }
@@ -94,11 +94,11 @@ public class MusicAdapter extends RecyclerView.Adapter {
                             R.string.texto_nome,
                             music.getNome())
             );
-            textViewTrack.setText(
-                    textViewNome.getContext().getResources().getString(
-                            R.string.texto_track,
-                            music.getTrackNu())
-            );
+//            textViewTrack.setText(
+//                    textViewNome.getContext().getResources().getString(
+//                            R.string.texto_track,
+//                            music.getTrackNu())
+//            );
             textViewGen.setText(
                     textViewNome.getContext().getResources().getString(
                             R.string.texto_gen,
