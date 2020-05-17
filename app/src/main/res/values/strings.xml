@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">BitesTheDust</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -13,61 +13,7 @@
 
     <string name="home_second">Home Second</string>
 
-    <array name="fotosAlbum">
-        <item>@drawable/beatles_one</item>
-        <item>@drawable/thriller</item>
-    </array>
 
-    <array name="fotosAlbumLarge">
-        <item>@drawable/beatles_one_large</item>
-        <item>@drawable/thriller_large</item>
-    </array>
-
-    <array name="fotosArtistas">
-        <item>@drawable/beatles</item>
-        <item>@drawable/michael_jackson</item>
-    </array>
-
-    <string-array name="artists">
-        <item>The Beatles</item>
-        <item>Michael Jackson</item>
-    </string-array>
-
-    <string-array name="genre">
-        <item>Rock</item>
-        <item>Pop</item>
-    </string-array>
-
-    <string-array name="musics">
-        <item>Love Me Do,1,0,0,0,0</item>
-        <item>From Me to You,2,0,0,0,1</item>
-        <item>She Loves You,2,0,0,0,2</item>
-        <item>I Want to Hold Your Hand,4,0,0,0,3</item>
-        <item>Can\'t Buy Me Love,5,0,0,0,4</item>
-        <item>A Hard Days Night,6,0,0,0,5</item>
-        <item>I Feel Fine,7,0,0,0,6</item>
-        <item>Eight Days a Week,8,0,0,0,7</item>
-        <item>Ticket to Ride,9,0,0,0,8</item>
-        <item>Help!,10,0,0,0,9</item>
-        <item>Yesterday,11,0,0,0,10</item>
-        <item>Day Tripper,12,0,0,0,11</item>
-        <item>We Can Work It Out,13,0,0,0,12</item>
-        <item>Paperback Writer,14,0,0,0,13</item>
-        <item>Yellow Submarine,15,0,0,0,14</item>
-        <item>Eleanor Rigby,16,0,0,0,15</item>
-        <item>Penny Lane,17,0,0,0,16</item>
-        <item>All You Need Is Love,18,0,0,0,17</item>
-        <item>Hello Goodbye,19,0,0,0,18</item>
-        <item>Lady Madonna,20,0,0,0,19</item>
-        <item>Hey Jude,21,0,0,0,20</item>
-        <item>Get Back,22,0,0,0,21</item>
-        <item>The Ballad of John and Yoko,23,0,0,0,22</item>
-        <item>Something,24,0,0,0,23</item>
-        <item>Come Together,25,0,0,0,24</item>
-        <item>Let It Be,26,0,0,0,25</item>
-        <item>The Long and Winding Road,27,0,0,0,26</item>
-        <item>Billie Jean,6,1,1,1,27</item>
-    </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cover">Album Cover</string>
