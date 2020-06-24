@@ -34,7 +34,6 @@ public class MusicsFragment extends Fragment implements JSONReceiver {
     private RecyclerView recyclerView;
     private MusicAdapter musicAdapter;
     private int origin = 0;
-    private String data;
 
     private ArrayList<Music> musicas = new ArrayList<>();
 
@@ -49,34 +48,28 @@ public class MusicsFragment extends Fragment implements JSONReceiver {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_musics, container, false);
         recyclerView = view.findViewById(R.id.recycler_view);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        String data;
+
         assert getArguments() != null;
         origin = getArguments().getInt("origin");
         data = getArguments().getString("data");
+
         if (origin == 1) {
             getArguments().remove("origin");
             origin = 0;
 
             if (!data.equals("")) {
-                System.out.println("************* " + data + " asdasd");
-                String url = "https://api.genius.com/search?q=" + data + "&access_token=MaALaMqzcduGO5dzRrkDUQei8E-rbz2BKNeHhszXdgJbZHzat9IVBbisjWjU8h4n";
-                new ReceiveJSON(MusicsFragment.this).execute(url);
-                musicAdapter = new MusicAdapter(
-                        musicas
-//                    new ArrayList(Arrays.asList(Music.getMusicsSearch(getContext(), data)))
-                );
+                makeACall(data);
+                musicAdapter = new MusicAdapter(musicas);
             } else {
                 data = "%25";
-                System.out.println("*************" + data + "*****************");
-                String url = "https://api.genius.com/search?q=" + data + "&access_token=MaALaMqzcduGO5dzRrkDUQei8E-rbz2BKNeHhszXdgJbZHzat9IVBbisjWjU8h4n";
-                new ReceiveJSON(MusicsFragment.this).execute(url);
-                musicAdapter = new MusicAdapter(
-                        musicas
-//                    new ArrayList(Arrays.asList(Music.getMusicsSearch(getContext(), data)))
-                );
+                makeACall(data);
+                musicAdapter = new MusicAdapter(musicas);
             }
         }
+
         MusicAdapter.MusicOnItemClickListener listener = new MusicAdapter.MusicOnItemClickListener() {
 
             @Override
@@ -89,10 +82,23 @@ public class MusicsFragment extends Fragment implements JSONReceiver {
 
             }
         };
+
+        if (musicAdapter == null) {
+            data = "%25";
+            makeACall(data);
+            musicAdapter = new MusicAdapter(musicas);
+        }
+
         musicAdapter.setMusicOnItemClickListener(listener);
 
         recyclerView.setAdapter(musicAdapter);
         return view;
+    }
+
+    private void makeACall(String data){
+        System.out.println("*************" + data + "*****************");
+        String url = "https://api.genius.com/search?q=" + data + "&per_page=10&page=1&sort=popularity&access_token=MaALaMqzcduGO5dzRrkDUQei8E-rbz2BKNeHhszXdgJbZHzat9IVBbisjWjU8h4n";
+        new ReceiveJSON(MusicsFragment.this).execute(url);
     }
 
     @Override
@@ -116,9 +122,15 @@ public class MusicsFragment extends Fragment implements JSONReceiver {
                 musicas.add(musica);
                 System.out.println(musicas.get(i).getNome());
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        refreshData(musicas);
+    }
 
+    private void refreshData(ArrayList<Music> data) {
+        musicas = new ArrayList<Music>(data);
+        musicAdapter.notifyDataSetChanged();
     }
 }

@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private View view;
-    private int selected;
+//    private int selected;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,37 +35,45 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         final EditText searchText = (EditText) view.findViewById(R.id.search_1);
-        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radio_select);
+//        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radio_select);
 
 
         view.findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (radioGroup.getCheckedRadioButtonId() == -1) {
 
-                } else {
-                    selected = radioGroup.getCheckedRadioButtonId();
-                    final RadioButton radioButton = (RadioButton) view.findViewById(selected);
-
-                    if (radioButton.getText().toString().equals(getString(R.string.music))) {
-                        //buscar musica
-                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
-                        Bundle bundle = new Bundle();
-                        bundle.putString("data", searchText.getText().toString());
-                        bundle.putInt("origin", 1);
-                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
-                        navController.navigate(R.id.arestaHM, bundle);
-
-                    } else if (radioButton.getText().toString().equals(getString(R.string.artist))) {
-                        //buscar artista
-                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.artist) + "|" + searchText.getText().toString());
-                        Bundle bundle = new Bundle();
-                        bundle.putString("data", searchText.getText().toString());
-                        bundle.putInt("origin", 1);
-                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
-                        navController.navigate(R.id.arestaHA, bundle);
-                    }
-                }
+                //buscar musica
+//                Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
+                Bundle bundle = new Bundle();
+                bundle.putString("data", searchText.getText().toString());
+                bundle.putInt("origin", 1);
+                NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+                navController.navigate(R.id.arestaHM, bundle);
+//                if (radioGroup.getCheckedRadioButtonId() == -1) {
+//
+//                } else {
+//                    selected = radioGroup.getCheckedRadioButtonId();
+//                    final RadioButton radioButton = (RadioButton) view.findViewById(selected);
+//
+//                    if (radioButton.getText().toString().equals(getString(R.string.music))) {
+//                        //buscar musica
+//                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("data", searchText.getText().toString());
+//                        bundle.putInt("origin", 1);
+//                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+//                        navController.navigate(R.id.arestaHM, bundle);
+//
+//                    } else if (radioButton.getText().toString().equals(getString(R.string.artist))) {
+//                        //buscar artista
+//                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.artist) + "|" + searchText.getText().toString());
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("data", searchText.getText().toString());
+//                        bundle.putInt("origin", 1);
+//                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
+//                        navController.navigate(R.id.arestaHA, bundle);
+//                    }
+//                }
             }
         });
         final TextView textView = view.findViewById(R.id.text_home);

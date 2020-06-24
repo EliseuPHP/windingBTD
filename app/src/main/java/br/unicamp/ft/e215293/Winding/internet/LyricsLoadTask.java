@@ -32,7 +32,7 @@ public class LyricsLoadTask extends AsyncTask<Void, Void, String> {
                 lyricDiv.select("br").append("***");
                 String s = lyricDiv.text();
                 lyric = s.replace("***", "\n");
-                System.out.println(lyric);
+                //System.out.println(lyric);
                 if (lyric == "") {
                     System.out.println("null lyric");
                 } else {

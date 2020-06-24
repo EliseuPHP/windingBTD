@@ -22,5 +22,6 @@
     <string name="artist">Artistas</string>
     <string name="btn_search">Buscar</string>
     <string name="search">Buscar</string>
+    <string name="Loading">Carregando…</string>
     <!--    test-->
 </resources>

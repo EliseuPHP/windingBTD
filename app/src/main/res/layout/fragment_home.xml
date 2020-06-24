@@ -37,35 +37,11 @@
             android:paddingTop="16dp"
             android:paddingRight="8dp"
             android:paddingBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@id/radio_select"
+            app:layout_constraintBottom_toTopOf="@id/btn_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_home"
             android:background="#05000000"/>
-
-        <RadioGroup
-            android:id="@+id/radio_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/btn_search"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_1">
-
-            <RadioButton
-                android:id="@+id/radio_artist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/artist" />
-
-            <RadioButton
-                android:id="@+id/radio_music"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/music" />
-        </RadioGroup>
 
         <Button
             android:id="@+id/btn_search"
@@ -78,7 +54,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radio_select"
+            app:layout_constraintTop_toBottomOf="@id/search_1"
             android:drawableEnd="@drawable/ic_search"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

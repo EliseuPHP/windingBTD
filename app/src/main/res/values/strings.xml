@@ -25,5 +25,6 @@
     <string name="search">Search</string>
     <string name="internet">Internet</string>
     <string name="test">Test</string>
+    <string name="Loading">Loading…</string>
     <!--    test-->
 </resources>
