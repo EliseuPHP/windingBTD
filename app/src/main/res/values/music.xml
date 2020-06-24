@@ -6,6 +6,8 @@
         <item>@drawable/shes_so_unusual_large</item>
         <item>@drawable/stupid_love</item>
         <item>@drawable/egypt_station</item>
+        <item>@drawable/a_night_at_the_opera</item>
+        <item>@drawable/the_game</item>
     </array>
 
     <array name="fotosAlbumLarge">
@@ -14,6 +16,8 @@
         <item>@drawable/shes_so_unusual_large</item>
         <item>@drawable/stupid_love</item>
         <item>@drawable/egypt_station</item>
+        <item>@drawable/a_night_at_the_opera</item>
+        <item>@drawable/the_game</item>
     </array>
 
     <string-array name="genre">
@@ -29,6 +33,8 @@
         <item>Stupid Love,1,3,1,3,29</item>
         <item>Come On To Me,3,4,1,4,30</item>
         <item>Fuh You,6,4,1,4,31</item>
+        <item>\'39,5,5,0,5,32</item>
+        <item>The Game,1,6,0,5,33</item>
         <item>Love Me Do,1,0,0,0,0</item>
         <item>From Me to You,2,0,0,0,1</item>
         <item>Can\'t Buy Me Love,5,0,0,0,4</item>

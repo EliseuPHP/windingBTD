@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
                         Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
                         Bundle bundle = new Bundle();
                         bundle.putString("data", searchText.getText().toString());
+                        bundle.putInt("origin", 1);
                         NavController navController = NavHostFragment.findNavController(HomeFragment.this);
                         navController.navigate(R.id.arestaHM, bundle);
 
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
                         Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.artist) + "|" + searchText.getText().toString());
                         Bundle bundle = new Bundle();
                         bundle.putString("data", searchText.getText().toString());
+                        bundle.putInt("origin", 1);
                         NavController navController = NavHostFragment.findNavController(HomeFragment.this);
                         navController.navigate(R.id.arestaHA, bundle);
                     }

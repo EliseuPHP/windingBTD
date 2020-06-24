@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import br.unicamp.ft.e215293.Winding.R;
+import br.unicamp.ft.e215293.Winding.internet.ImageLoadTask;
 
 public class MusicAdapter extends RecyclerView.Adapter {
 
@@ -27,18 +28,21 @@ public class MusicAdapter extends RecyclerView.Adapter {
         View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.adapter_layout, parent, false
         );
+        final MusicViewHolder musicViewHolder = new MusicViewHolder(view);
 
         view.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (musicOnItemClickListener != null) {
+
                     TextView nome = v.findViewById(R.id.text_view_nome);
                     TextView artist = v.findViewById(R.id.text_view_art);
-                    musicOnItemClickListener.musicOnItemClickListener(nome.getText().toString(), artist.getText().toString());
+                    musicOnItemClickListener.musicOnItemClickListener(musics.get(musicViewHolder.getPosicao()));
+
                 }
             }
         });
-        final MusicViewHolder musicViewHolder = new MusicViewHolder(view);
 
         return musicViewHolder;
     }
@@ -56,7 +60,7 @@ public class MusicAdapter extends RecyclerView.Adapter {
 
     //Interface OnClick
     public interface MusicOnItemClickListener {
-        void musicOnItemClickListener(String nome,String art);
+        void musicOnItemClickListener(Music music);
     }
 
     private MusicOnItemClickListener musicOnItemClickListener;
@@ -70,7 +74,7 @@ public class MusicAdapter extends RecyclerView.Adapter {
         private ImageView imageView;
         private TextView textViewNome;
         //private TextView textViewTrack;
-        private TextView textViewGen;
+//        private TextView textViewGen;
         private TextView textViewArt;
         private int posicao;
 
@@ -79,7 +83,7 @@ public class MusicAdapter extends RecyclerView.Adapter {
             imageView = itemView.findViewById(R.id.image_view);
             textViewNome = itemView.findViewById(R.id.text_view_nome);
             //textViewTrack = itemView.findViewById(R.id.text_view_track);
-            textViewGen = itemView.findViewById(R.id.text_view_gen);
+//            textViewGen = itemView.findViewById(R.id.text_view_gen);
             textViewArt = itemView.findViewById(R.id.text_view_art);
         }
 
@@ -88,7 +92,8 @@ public class MusicAdapter extends RecyclerView.Adapter {
         }
 
         public void bind(Music music) {
-            imageView.setImageResource(music.getFoto());
+            new ImageLoadTask(music.getSongArt(), imageView).execute();
+//            imageView.setImageResource(music.getFoto());
             textViewNome.setText(
                     textViewNome.getContext().getResources().getString(
                             R.string.texto_nome,
@@ -99,11 +104,6 @@ public class MusicAdapter extends RecyclerView.Adapter {
 //                            R.string.texto_track,
 //                            music.getTrackNu())
 //            );
-            textViewGen.setText(
-                    textViewNome.getContext().getResources().getString(
-                            R.string.texto_gen,
-                            music.getGenero())
-            );
             textViewArt.setText(
                     textViewNome.getContext().getResources().getString(
                             R.string.texto_gen,
@@ -116,4 +116,5 @@ public class MusicAdapter extends RecyclerView.Adapter {
             return this.posicao;
         }
     }
+
 }

@@ -6,6 +6,7 @@
         <item>@drawable/cyndy_lauper</item>
         <item>@drawable/lady_gaga</item>
         <item>@drawable/pauk_mccartney</item>
+        <item>@drawable/queen</item>
     </array>
 
     <string-array name="artists">
@@ -14,5 +15,6 @@
         <item>Cyndy Lauper</item>
         <item>Lady Gaga</item>
         <item>Paul McCartney</item>
+        <item>Queen</item>
     </string-array>
 </resources>

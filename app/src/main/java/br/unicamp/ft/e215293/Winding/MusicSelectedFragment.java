@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import br.unicamp.ft.e215293.Winding.internet.ImageLoadTask;
+import br.unicamp.ft.e215293.Winding.internet.LyricsLoadTask;
 import br.unicamp.ft.e215293.Winding.music.Music;
 
 
@@ -33,20 +35,19 @@ public class MusicSelectedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_music_selected, container, false);
         assert getArguments() != null;
-        String nome = getArguments().getString("nome");
-        String art = getArguments().getString("art");
+        Music music = (Music) getArguments().getSerializable("music");
 
-        Music music = Music.getMusicsOne(getContext(), nome, art);
         ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
         TextView textViewNome = (TextView) view.findViewById(R.id.nome_mus);
         TextView textViewArt = (TextView) view.findViewById(R.id.nome_art);
         TextView textViewLet = (TextView) view.findViewById(R.id.nome_letra);
-        TextView textViewGen = (TextView) view.findViewById(R.id.nome_gen);
-        imageView.setImageResource(music.getFoto());
+//        TextView textViewGen = (TextView) view.findViewById(R.id.nome_gen);
+        new ImageLoadTask(music.getSongArt(), imageView).execute();
+
         textViewNome.setText(music.getNome());
         textViewArt.setText(music.getArtista());
-        textViewLet.setText(music.getLetra());
-        textViewGen.setText(music.getGenero());
+        new LyricsLoadTask(music.getLetra(), textViewLet).execute();
+//        textViewGen.setText(music.getGenero());
         return view;
     }
 }

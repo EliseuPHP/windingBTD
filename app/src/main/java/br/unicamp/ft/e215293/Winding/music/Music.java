@@ -4,16 +4,20 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import br.unicamp.ft.e215293.Winding.R;
 
-public class Music {
+public class Music implements Serializable {
+    private int idMusica;
     private String nome;
     private int trackNu;
     private int foto;
+    private String songArt;
     private String genero;
     private String artista;
+    private int idArtista;
     private String letra;
 
     public Music(String nome, int trackNu, int foto, String genero, String artista, String letra) {
@@ -23,6 +27,39 @@ public class Music {
         this.genero = genero;
         this.artista = artista;
         this.letra = letra;
+    }
+
+    public Music(int idMusica, String nome, String songArt, String letra, int idArtista, String artista) {
+        this.idMusica = idMusica;
+        this.nome = nome;
+        this.songArt = songArt;
+        this.letra = letra;
+        this.idArtista = idArtista;
+        this.artista = artista;
+    }
+
+    public String getSongArt() {
+        return songArt;
+    }
+
+    public void setSongArt(String songArt) {
+        this.songArt = songArt;
+    }
+
+    public int getIdMusica() {
+        return idMusica;
+    }
+
+    public void setIdMusica(int idMusica) {
+        this.idMusica = idMusica;
+    }
+
+    public int getIdArtista() {
+        return idArtista;
+    }
+
+    public void setIdArtista(int idArtista) {
+        this.idArtista = idArtista;
     }
 
     public String getNome() {
@@ -147,7 +184,8 @@ public class Music {
                                 genero[Integer.parseInt(info[3])],
                                 artista[Integer.parseInt(info[4])],
                                 letra[Integer.parseInt(info[5])]);
-                    };
+                    }
+                    ;
                 }
 
             }

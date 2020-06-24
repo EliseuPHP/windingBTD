@@ -18,28 +18,15 @@
             android:id="@+id/arestaHA"
             app:destination="@id/artistFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="br.unicamp.ft.e215293.Winding.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="br.unicamp.ft.e215293.Winding.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/musicsFragment"
         android:name="br.unicamp.ft.e215293.Winding.MusicsFragment"
-        android:label="Musicas"
+        android:label="@string/music"
         tools:layout="@layout/fragment_musics" >
         <argument
             android:name="data"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="defaultVal" />
+            android:defaultValue="%25" />
         <action
             android:id="@+id/arestaMS"
             app:destination="@id/musicSelectedFragment" />
@@ -47,7 +34,7 @@
     <fragment
         android:id="@+id/artistFragment"
         android:name="br.unicamp.ft.e215293.Winding.ArtistFragment"
-        android:label="Artistas"
+        android:label="@string/artist"
         tools:layout="@layout/fragment_artist" >
         <action
             android:id="@+id/aresta"
@@ -71,4 +58,9 @@
             android:defaultValue="defaultVal"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="br.unicamp.ft.e215293.Winding.internet.TestFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
 </navigation>
