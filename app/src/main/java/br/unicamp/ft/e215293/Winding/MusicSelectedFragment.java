@@ -41,13 +41,11 @@ public class MusicSelectedFragment extends Fragment {
         TextView textViewNome = (TextView) view.findViewById(R.id.nome_mus);
         TextView textViewArt = (TextView) view.findViewById(R.id.nome_art);
         TextView textViewLet = (TextView) view.findViewById(R.id.nome_letra);
-//        TextView textViewGen = (TextView) view.findViewById(R.id.nome_gen);
         new ImageLoadTask(music.getSongArt(), imageView).execute();
 
         textViewNome.setText(music.getNome());
         textViewArt.setText(music.getArtista());
         new LyricsLoadTask(music.getLetra(), textViewLet).execute();
-//        textViewGen.setText(music.getGenero());
         return view;
     }
 }

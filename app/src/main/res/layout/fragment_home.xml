@@ -31,6 +31,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:background="#05000000"
             android:hint="@string/search"
             android:inputType="text"
             android:paddingLeft="8dp"
@@ -40,8 +41,7 @@
             app:layout_constraintBottom_toTopOf="@id/btn_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_home"
-            android:background="#05000000"/>
+            app:layout_constraintTop_toBottomOf="@id/text_home" />
 
         <Button
             android:id="@+id/btn_search"
@@ -50,18 +50,41 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:drawableEnd="@drawable/ic_search"
             android:text="@string/search"
+            app:layout_constraintBottom_toTopOf="@id/text_auth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_1" />
+
+        <TextView
+            android:id="@+id/text_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/welcome"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@id/text_auth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_search" />
+
+        <TextView
+            android:id="@+id/text_auth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/auth"
+            android:textSize="24sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_1"
-            android:drawableEnd="@drawable/ic_search"/>
+            app:layout_constraintTop_toBottomOf="@id/text_welcome" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
-
-    <!--android:id="@+id/text_home"-->
-    <!--android:id="@+id/search_1"-->
-    <!--android:id="@+id/radio_select"-->
-    <!--android:id="@+id/radio_artist"-->
-    <!--android:id="@+id/radio_music"-->
-    <!--android:id="@+id/btn_search"-->

@@ -26,5 +26,14 @@
     <string name="internet">Internet</string>
     <string name="test">Test</string>
     <string name="Loading">Loading…</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="sign_in">Sign-In</string>
+    <string name="create_account">Create Account</string>
+    <string name="welcome">Welcome</string>
+    <string name="auth">Log In</string>
+    <string name="logout">Log Out</string>
+    <string name="login">Log In</string>
+    <string name="welcomeBack">Welcome Back,</string>
     <!--    test-->
 </resources>

@@ -23,5 +23,11 @@
     <string name="btn_search">Buscar</string>
     <string name="search">Buscar</string>
     <string name="Loading">Carregando…</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="sign_in">Sign-In</string>
+    <string name="create_account">Create Account</string>
+    <string name="logout">Log Out</string>
+    <string name="login">Log In</string>
     <!--    test-->
 </resources>

@@ -1,5 +1,6 @@
 package br.unicamp.ft.e215293.Winding.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,14 +20,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import br.unicamp.ft.e215293.Winding.ArtistFragment;
 import br.unicamp.ft.e215293.Winding.R;
+import br.unicamp.ft.e215293.Winding.SignInActivity;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private View view;
-//    private int selected;
+
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,45 +42,18 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         final EditText searchText = (EditText) view.findViewById(R.id.search_1);
-//        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radio_select);
-
 
         view.findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //buscar musica
-//                Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
                 Bundle bundle = new Bundle();
                 bundle.putString("data", searchText.getText().toString());
                 bundle.putInt("origin", 1);
                 NavController navController = NavHostFragment.findNavController(HomeFragment.this);
                 navController.navigate(R.id.arestaHM, bundle);
-//                if (radioGroup.getCheckedRadioButtonId() == -1) {
-//
-//                } else {
-//                    selected = radioGroup.getCheckedRadioButtonId();
-//                    final RadioButton radioButton = (RadioButton) view.findViewById(selected);
-//
-//                    if (radioButton.getText().toString().equals(getString(R.string.music))) {
-//                        //buscar musica
-//                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.music));
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("data", searchText.getText().toString());
-//                        bundle.putInt("origin", 1);
-//                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
-//                        navController.navigate(R.id.arestaHM, bundle);
-//
-//                    } else if (radioButton.getText().toString().equals(getString(R.string.artist))) {
-//                        //buscar artista
-//                        Log.i("zipzop", radioButton.getText().toString() + "|" + getString(R.string.artist) + "|" + searchText.getText().toString());
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("data", searchText.getText().toString());
-//                        bundle.putInt("origin", 1);
-//                        NavController navController = NavHostFragment.findNavController(HomeFragment.this);
-//                        navController.navigate(R.id.arestaHA, bundle);
-//                    }
-//                }
+
             }
         });
         final TextView textView = view.findViewById(R.id.text_home);
@@ -84,5 +64,41 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+
+        if (mFirebaseUser != null) {
+            TextView welcomeText = (TextView) view.findViewById(R.id.text_welcome);
+            System.out.println("************************" + R.string.welcomeBack);
+            welcomeText.setText(getContext().getResources().getString(R.string.welcomeBack) + " " + mFirebaseUser.getDisplayName());
+            final TextView authText = (TextView) view.findViewById(R.id.text_auth);
+            authText.setText(getContext().getResources().getString(R.string.logout));
+            authText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), SignInActivity.class);
+                    startActivity(intent);
+                    System.out.println(authText.getText().toString());
+                }
+            });
+        } else {
+            TextView welcomeText = (TextView) view.findViewById(R.id.text_welcome);
+            welcomeText.setText(getContext().getResources().getString(R.string.welcome));
+            final TextView authText = (TextView) view.findViewById(R.id.text_auth);
+            authText.setText(getContext().getResources().getString(R.string.login));
+            authText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), SignInActivity.class);
+                    startActivity(intent);
+                    System.out.println(authText.getText().toString());
+                }
+            });
+        }
     }
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "96109988638",
+    "firebase_url": "https://winding-bc52d.firebaseio.com",
+    "project_id": "winding-bc52d",
+    "storage_bucket": "winding-bc52d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96109988638:android:5844762006c84ba56b170f",
+        "android_client_info": {
+          "package_name": "br.unicamp.ft.e215293.Winding"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96109988638-d6o7t9qq17lm49igonoo0j891l01j3p5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.unicamp.ft.e215293.Winding",
+            "certificate_hash": "9b1860348fbec38bdf7ad04992d24e7673e04c64"
+          }
+        },
+        {
+          "client_id": "96109988638-mn2ifiqp2ij1l9b4lbsm79rc1f9ss694.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLFUDNRGJrdH6tcyrZhE4dJExxA-1HkZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96109988638-mn2ifiqp2ij1l9b4lbsm79rc1f9ss694.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
