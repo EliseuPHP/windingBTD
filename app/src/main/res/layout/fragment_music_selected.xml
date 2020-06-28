@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/nome_art"
@@ -41,20 +41,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_view" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/nome_gen"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:padding="2dp"-->
-<!--            android:text="@string/Loading"-->
-<!--            android:textColor="#707181"-->
-<!--            android:textSize="18sp"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/nome_art"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/nome_art"/>-->
-
         <TextView
             android:id="@+id/nome_mus"
             android:layout_width="wrap_content"
@@ -68,7 +54,19 @@
             app:layout_constraintBottom_toTopOf="@id/nome_letra"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nome_art"/>
+            app:layout_constraintTop_toBottomOf="@id/nome_art" />
+
+        <TextView
+            android:id="@+id/icon_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableStart="@drawable/ic_heart"
+            app:layout_constraintBottom_toTopOf="@id/nome_letra"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nome_mus" />
 
         <TextView
             android:id="@+id/nome_letra"
@@ -83,6 +81,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nome_mus"/>
+            app:layout_constraintTop_toBottomOf="@id/nome_mus" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

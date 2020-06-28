@@ -1,15 +1,17 @@
-package br.unicamp.ft.e215293.Winding.internet;
+package br.unicamp.ft.e215293.Winding;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,36 +21,38 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.unicamp.ft.e215293.Winding.R;
+import br.unicamp.ft.e215293.Winding.internet.JSONReceiver;
+import br.unicamp.ft.e215293.Winding.internet.ReceiveJSON;
+import br.unicamp.ft.e215293.Winding.internet.TestFragment;
 import br.unicamp.ft.e215293.Winding.music.Music;
-import br.unicamp.ft.e215293.Winding.music.MusicFav;
+import br.unicamp.ft.e215293.Winding.music.MusicAdapter;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TestFragment extends Fragment implements JSONReceiver {
+public class FavoritesFragment extends Fragment implements JSONReceiver {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private View lview;
-    private TextView textView;
-    private EditText editText;
+
+    private RecyclerView recyclerView;
+    private MusicAdapter musicAdapter;
+    private int count = 0, quant = 0;
+
     private DatabaseReference mDatabaseReference;
 
-    public TestFragment() {
+
+    private ArrayList<Music> musicas = new ArrayList<>();
+
+    public FavoritesFragment() {
         // Required empty public constructor
     }
 
@@ -57,31 +61,29 @@ public class TestFragment extends Fragment implements JSONReceiver {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (lview == null) {
-            lview = inflater.inflate(R.layout.fragment_test, container, false);
-        }
+        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        textView = lview.findViewById(R.id.textView);
-        editText = lview.findViewById(R.id.editText);
-
-
-        lview.findViewById(R.id.btnAction).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                }
-        );
-
-
-        return lview;
+        return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        getFavortes();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        count = 0;
+        getFavortes();
+
+    }
+
+    private void getFavortes() {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -91,14 +93,31 @@ public class TestFragment extends Fragment implements JSONReceiver {
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    musicas.clear();
                     System.out.println("" + dataSnapshot.getValue());
                     Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
-
+                    quant = td.keySet().size();
                     for (String key : td.keySet()) {
                         System.out.println(key);
-                        String url = "https://api.genius.com/songs/" + key + "?&access_token=MaALaMqzcduGO5dzRrkDUQei8E-rbz2BKNeHhszXdgJbZHzat9IVBbisjWjU8h4n";
-                        new ReceiveJSON(TestFragment.this).execute(url);
+                        makeACall(key);
                     }
+                    musicAdapter = new MusicAdapter(musicas);
+
+                    MusicAdapter.MusicOnItemClickListener listener = new MusicAdapter.MusicOnItemClickListener() {
+
+                        @Override
+                        public void musicOnItemClickListener(Music music) {
+//                Toast.makeText(getContext(), nome + "|" + art, Toast.LENGTH_SHORT).show();
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("music", music);
+                            NavController navController = NavHostFragment.findNavController(FavoritesFragment.this);
+                            navController.navigate(R.id.arestaMS, bundle);
+                        }
+                    };
+
+                    musicAdapter.setMusicOnItemClickListener(listener);
+
+                    recyclerView.setAdapter(musicAdapter);
                 }
 
                 @Override
@@ -107,7 +126,12 @@ public class TestFragment extends Fragment implements JSONReceiver {
                 }
             });
         }
+    }
 
+    private void makeACall(String data) {
+        System.out.println("*************" + data + "*****************");
+        String url = "https://api.genius.com/songs/" + data + "?&access_token=MaALaMqzcduGO5dzRrkDUQei8E-rbz2BKNeHhszXdgJbZHzat9IVBbisjWjU8h4n";
+        new ReceiveJSON(FavoritesFragment.this).execute(url);
     }
 
     @Override
@@ -125,10 +149,20 @@ public class TestFragment extends Fragment implements JSONReceiver {
             int idArtist = artist.getInt("id");
             String lPath = "http://genius.com" + data.getString("path");
             Music musica = new Music(idMusica, nome, songArt, lPath, idArtist, artista);
-
-            textView.append("\n"+nome+"\n\n");
+            musicas.add(musica);
+            System.out.println(musica.getNome());
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        count++;
+        if (count == quant) {
+            refreshData(musicas);
+
+        }
+    }
+
+    private void refreshData(ArrayList<Music> data) {
+        musicas = new ArrayList<Music>(data);
+        musicAdapter.notifyDataSetChanged();
     }
 }

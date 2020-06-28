@@ -29,5 +29,6 @@
     <string name="create_account">Create Account</string>
     <string name="logout">Log Out</string>
     <string name="login">Log In</string>
+    <string name="favorites">Favorites</string>
     <!--    test-->
 </resources>

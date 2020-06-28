@@ -35,5 +35,6 @@
     <string name="logout">Log Out</string>
     <string name="login">Log In</string>
     <string name="welcomeBack">Welcome Back,</string>
+    <string name="favorites">Favorites</string>
     <!--    test-->
 </resources>

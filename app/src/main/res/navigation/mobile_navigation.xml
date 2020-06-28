@@ -63,4 +63,13 @@
         android:name="br.unicamp.ft.e215293.Winding.internet.TestFragment"
         android:label="fragment_test"
         tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="br.unicamp.ft.e215293.Winding.FavoritesFragment"
+        android:label="@string/favorites"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/arestaMS"
+            app:destination="@id/musicSelectedFragment" />
+    </fragment>
 </navigation>
