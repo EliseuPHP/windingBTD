@@ -120,7 +120,7 @@ public class MusicsFragment extends Fragment implements JSONReceiver {
                 String lPath = "http://genius.com" + data.getString("path");
                 Music musica = new Music(idMusica, nome, songArt, lPath, idArtist, artista);
                 musicas.add(musica);
-                System.out.println(musicas.get(i).getNome());
+                System.out.println(musicas.get(i).getNomeMusica());
             }
 
         } catch (JSONException e) {

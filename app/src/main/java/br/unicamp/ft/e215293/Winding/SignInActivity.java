@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import br.unicamp.ft.e215293.Winding.internet.ImageLoadTask;
+
 
 public class SignInActivity extends AppCompatActivity implements
         View.OnClickListener {
@@ -36,6 +39,7 @@ public class SignInActivity extends AppCompatActivity implements
 
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +47,12 @@ public class SignInActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_sign_in);
 
         // Views
-        mStatusTextView = findViewById(R.id.status);
+        mStatusTextView = findViewById(R.id.text_view_top);
+        imageView = findViewById(R.id.image_view);
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
-        findViewById(R.id.finish_button).setOnClickListener(this);
 
         // [START configure_signin]
         // Configure sign-in to request the user's ID, email address, and basic
@@ -184,15 +187,21 @@ public class SignInActivity extends AppCompatActivity implements
 
     private void updateUI(GoogleSignInAccount account) {
         if (account != null) {
-            mStatusTextView.setText("Signed In as: " + account.getDisplayName());
+            String url = account.getPhotoUrl().toString().replace("s96", "s400");
+            new ImageLoadTask(url, imageView).execute();
+            findViewById(R.id.cardView).setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.VISIBLE);
+            mStatusTextView.setText(account.getDisplayName());
 
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
+            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
         } else {
-            mStatusTextView.setText("Deslogado");
+            findViewById(R.id.cardView).setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+            mStatusTextView.setText(getString(R.string.please) + " " + getString(R.string.login));
 
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
         }
     }
 
@@ -204,12 +213,6 @@ public class SignInActivity extends AppCompatActivity implements
                 break;
             case R.id.sign_out_button:
                 signOut();
-                break;
-            case R.id.disconnect_button:
-                revokeAccess();
-                break;
-            case R.id.finish_button:
-                finish();
                 break;
         }
     }

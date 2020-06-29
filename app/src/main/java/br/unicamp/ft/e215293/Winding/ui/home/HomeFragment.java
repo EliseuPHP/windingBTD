@@ -70,35 +70,41 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        mFirebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
-        if (mFirebaseUser != null) {
-            TextView welcomeText = (TextView) view.findViewById(R.id.text_welcome);
-            System.out.println("************************" + R.string.welcomeBack);
-            welcomeText.setText(getContext().getResources().getString(R.string.welcomeBack) + " " + mFirebaseUser.getDisplayName());
-            final TextView authText = (TextView) view.findViewById(R.id.text_auth);
-            authText.setText(getContext().getResources().getString(R.string.logout));
-            authText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), SignInActivity.class);
-                    startActivity(intent);
-                    System.out.println(authText.getText().toString());
+                if (mFirebaseUser != null) {
+                    TextView welcomeText = (TextView) view.findViewById(R.id.text_welcome);
+                    System.out.println("************************" + R.string.welcomeBack);
+                    welcomeText.setText(getContext().getResources().getString(R.string.welcomeBack) + " " + mFirebaseUser.getDisplayName());
+                    final TextView authText = (TextView) view.findViewById(R.id.text_auth);
+                    authText.setText(getContext().getResources().getString(R.string.logout));
+                    authText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), SignInActivity.class);
+                            startActivity(intent);
+                            System.out.println(authText.getText().toString());
+                        }
+                    });
+                } else {
+                    TextView welcomeText = (TextView) view.findViewById(R.id.text_welcome);
+                    welcomeText.setText(getContext().getResources().getString(R.string.welcome));
+                    final TextView authText = (TextView) view.findViewById(R.id.text_auth);
+                    authText.setText(getContext().getResources().getString(R.string.login));
+                    authText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), SignInActivity.class);
+                            startActivity(intent);
+                            System.out.println(authText.getText().toString());
+                        }
+                    });
                 }
-            });
-        } else {
-            TextView welcomeText = (TextView) view.findViewById(R.id.text_welcome);
-            welcomeText.setText(getContext().getResources().getString(R.string.welcome));
-            final TextView authText = (TextView) view.findViewById(R.id.text_auth);
-            authText.setText(getContext().getResources().getString(R.string.login));
-            authText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), SignInActivity.class);
-                    startActivity(intent);
-                    System.out.println(authText.getText().toString());
-                }
-            });
-        }
+            }
+        });
+
     }
 }

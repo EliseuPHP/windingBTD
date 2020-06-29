@@ -69,12 +69,10 @@ public class MusicAdapter extends RecyclerView.Adapter {
         this.musicOnItemClickListener = m;
     }
 
-    class MusicViewHolder extends RecyclerView.ViewHolder {
+    static class MusicViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageView;
         private TextView textViewNome;
-        //private TextView textViewTrack;
-//        private TextView textViewGen;
         private TextView textViewArt;
         private int posicao;
 
@@ -82,8 +80,6 @@ public class MusicAdapter extends RecyclerView.Adapter {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_view);
             textViewNome = itemView.findViewById(R.id.text_view_nome);
-            //textViewTrack = itemView.findViewById(R.id.text_view_track);
-//            textViewGen = itemView.findViewById(R.id.text_view_gen);
             textViewArt = itemView.findViewById(R.id.text_view_art);
         }
 
@@ -92,22 +88,18 @@ public class MusicAdapter extends RecyclerView.Adapter {
         }
 
         public void bind(Music music) {
+//            imageView.setImageBitmap(null);
             new ImageLoadTask(music.getSongArt(), imageView).execute();
-//            imageView.setImageResource(music.getFoto());
             textViewNome.setText(
                     textViewNome.getContext().getResources().getString(
                             R.string.texto_nome,
-                            music.getNome())
+                            music.getNomeMusica())
             );
-//            textViewTrack.setText(
-//                    textViewNome.getContext().getResources().getString(
-//                            R.string.texto_track,
-//                            music.getTrackNu())
-//            );
+
             textViewArt.setText(
                     textViewNome.getContext().getResources().getString(
                             R.string.texto_gen,
-                            music.getArtista())
+                            music.getNomeArtista())
             );
 
         }
@@ -117,4 +109,13 @@ public class MusicAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 }

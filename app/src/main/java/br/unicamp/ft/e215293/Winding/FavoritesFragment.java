@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +31,6 @@ import java.util.Map;
 
 import br.unicamp.ft.e215293.Winding.internet.JSONReceiver;
 import br.unicamp.ft.e215293.Winding.internet.ReceiveJSON;
-import br.unicamp.ft.e215293.Winding.internet.TestFragment;
 import br.unicamp.ft.e215293.Winding.music.Music;
 import br.unicamp.ft.e215293.Winding.music.MusicAdapter;
 
@@ -49,6 +49,7 @@ public class FavoritesFragment extends Fragment implements JSONReceiver {
 
     private DatabaseReference mDatabaseReference;
 
+    private View view;
 
     private ArrayList<Music> musicas = new ArrayList<>();
 
@@ -61,7 +62,7 @@ public class FavoritesFragment extends Fragment implements JSONReceiver {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        view = inflater.inflate(R.layout.fragment_favorites, container, false);
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -71,7 +72,7 @@ public class FavoritesFragment extends Fragment implements JSONReceiver {
     @Override
     public void onStart() {
         super.onStart();
-        getFavortes();
+        getFavorites();
 
     }
 
@@ -79,11 +80,11 @@ public class FavoritesFragment extends Fragment implements JSONReceiver {
     public void onResume() {
         super.onResume();
         count = 0;
-        getFavortes();
+        getFavorites();
 
     }
 
-    private void getFavortes() {
+    private void getFavorites() {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -94,30 +95,35 @@ public class FavoritesFragment extends Fragment implements JSONReceiver {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     musicas.clear();
-                    System.out.println("" + dataSnapshot.getValue());
-                    Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
-                    quant = td.keySet().size();
-                    for (String key : td.keySet()) {
-                        System.out.println(key);
-                        makeACall(key);
-                    }
-                    musicAdapter = new MusicAdapter(musicas);
-
-                    MusicAdapter.MusicOnItemClickListener listener = new MusicAdapter.MusicOnItemClickListener() {
-
-                        @Override
-                        public void musicOnItemClickListener(Music music) {
-//                Toast.makeText(getContext(), nome + "|" + art, Toast.LENGTH_SHORT).show();
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("music", music);
-                            NavController navController = NavHostFragment.findNavController(FavoritesFragment.this);
-                            navController.navigate(R.id.arestaMS, bundle);
+                    if (dataSnapshot.getValue() != null) {
+                        System.out.println("" + dataSnapshot.getValue());
+                        Map<String, Object> td = (HashMap<String, Object>) dataSnapshot.getValue();
+                        quant = td.keySet().size();
+                        for (String key : td.keySet()) {
+                            System.out.println(key);
+                            makeACall(key);
                         }
-                    };
 
-                    musicAdapter.setMusicOnItemClickListener(listener);
+                        musicAdapter = new MusicAdapter(musicas);
 
-                    recyclerView.setAdapter(musicAdapter);
+                        MusicAdapter.MusicOnItemClickListener listener = new MusicAdapter.MusicOnItemClickListener() {
+
+                            @Override
+                            public void musicOnItemClickListener(Music music) {
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("music", music);
+                                NavController navController = NavHostFragment.findNavController(FavoritesFragment.this);
+                                navController.navigate(R.id.arestaMS, bundle);
+                            }
+                        };
+
+                        musicAdapter.setMusicOnItemClickListener(listener);
+
+                        recyclerView.setAdapter(musicAdapter);
+                    } else {
+                        TextView textView = (TextView) view.findViewById(R.id.text_loading);
+                        textView.setText(R.string.no_fav);
+                    }
                 }
 
                 @Override
@@ -150,14 +156,15 @@ public class FavoritesFragment extends Fragment implements JSONReceiver {
             String lPath = "http://genius.com" + data.getString("path");
             Music musica = new Music(idMusica, nome, songArt, lPath, idArtist, artista);
             musicas.add(musica);
-            System.out.println(musica.getNome());
+            System.out.println(musica.getNomeMusica());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         count++;
         if (count == quant) {
+            TextView textView = (TextView) view.findViewById(R.id.text_loading);
+            textView.setVisibility(View.GONE);
             refreshData(musicas);
-
         }
     }
 

@@ -1,5 +1,9 @@
 package br.unicamp.ft.e215293.Winding;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.TypedValue;
@@ -13,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -32,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    private NavigationView navigationView;
+
+
+    /* Broadcast receiver */
+    private ServiceReceiver serviceReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.artistFragment, R.id.musicsFragment, R.id.favoritesFragment)
+                R.id.nav_home, R.id.musicsFragment, R.id.favoritesFragment, R.id.artistFragment)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -69,6 +80,23 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+        mFirebaseAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                updateUi();
+            }
+        });
+
+        /* Registrar o BroadCastReceiver */
+        serviceReceiver = new ServiceReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("REDIRECTING");
+        registerReceiver(serviceReceiver, intentFilter);
+    }
+
+    private void updateUi() {
+
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
         if (mFirebaseUser != null) {
@@ -90,7 +118,11 @@ public class MainActivity extends AppCompatActivity {
             ImageView navImage = (ImageView) headerView.findViewById(R.id.nav_header_photo);
             navImage.setVisibility(View.VISIBLE);
             new ImageLoadTask(mFirebaseUser.getPhotoUrl().toString(), navImage).execute();
+            //sidebar
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.favoritesFragment).setVisible(true);
         } else {
+
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             View headerView = navigationView.getHeaderView(0);
             //change header size
@@ -105,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
             cardView.setVisibility(View.GONE);
             ImageView navImage = (ImageView) headerView.findViewById(R.id.nav_header_photo);
             navImage.setVisibility(View.GONE);
+            //sidebar
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.favoritesFragment).setVisible(false);
         }
     }
 
@@ -114,6 +149,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private class ServiceReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+        }
     }
 }
 

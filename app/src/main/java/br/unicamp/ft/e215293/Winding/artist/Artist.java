@@ -4,67 +4,55 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import br.unicamp.ft.e215293.Winding.R;
 
-public class Artist {
-    private String nome;
-    private int foto;
+public class Artist implements Serializable {
 
-    public Artist(String nome, int foto) {
-        this.nome = nome;
-        this.foto = foto;
+    private int idArtista;
+    private String nomeArtista;
+    private String artArtista;
+    private String descArtista;
+
+    public Artist(int idArtista, String nomeArtista, String artArtista, String descArtista) {
+        this.idArtista = idArtista;
+        this.nomeArtista = nomeArtista;
+        this.artArtista = artArtista;
+        this.descArtista = descArtista;
     }
 
-    public String getNome() {
-        return nome;
+    public int getIdArtista() {
+        return idArtista;
     }
 
-    public int getFoto() {
-        return foto;
+    public void setIdArtista(int idArtista) {
+        this.idArtista = idArtista;
     }
 
-    public static Artist[] getArtists(Context context) {
-        if (context != null) {
-            TypedArray fotos = context.getResources().obtainTypedArray(R.array.fotosArtistas);
-            String[] artist = context.getResources().getStringArray(R.array.artists);
-            ArrayList<Artist> artists = new ArrayList<>();
-
-            for (int i = 0; i < artist.length; i++) {
-                artists.add(new Artist(
-                        artist[i],
-                        fotos.getResourceId(i, 0)
-                ));
-            }
-            fotos.recycle();
-            Artist[] artistsArr = new Artist[artists.size()];
-            return artists.toArray(artistsArr);
-
-        }
-        return null;
+    public String getNomeArtista() {
+        return nomeArtista;
     }
 
-    public static Artist[] getArtistsSearch(Context context, String data) {
-        if (context != null) {
-            TypedArray fotos = context.getResources().obtainTypedArray(R.array.fotosArtistas);
-            String[] artist = context.getResources().getStringArray(R.array.artists);
-            ArrayList<Artist> artists = new ArrayList<>();
-
-            for (int i = 0; i < artist.length; i++) {
-                Log.i("zipzop", data);
-                if (artist[i].toLowerCase().contains(data.toLowerCase())) {
-                    artists.add(new Artist(
-                            artist[i],
-                            fotos.getResourceId(i, 0)
-                    ));
-                }
-            }
-            fotos.recycle();
-            Artist[] artistsArr = new Artist[artists.size()];
-            return artists.toArray(artistsArr);
-
-        }
-        return null;
+    public void setNomeArtista(String nomeArtista) {
+        this.nomeArtista = nomeArtista;
     }
+
+    public String getArtArtista() {
+        return artArtista;
+    }
+
+    public void setArtArtista(String artArtista) {
+        this.artArtista = artArtista;
+    }
+
+    public String getDescArtista() {
+        return descArtista;
+    }
+
+    public void setDescArtista(String descArtista) {
+        this.descArtista = descArtista;
+    }
+
 }

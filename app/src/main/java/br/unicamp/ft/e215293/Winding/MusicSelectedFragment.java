@@ -1,13 +1,11 @@
 package br.unicamp.ft.e215293.Winding;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +21,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import br.unicamp.ft.e215293.Winding.artist.Artist;
 import br.unicamp.ft.e215293.Winding.internet.ImageLoadTask;
+import br.unicamp.ft.e215293.Winding.internet.JSONReceiver;
 import br.unicamp.ft.e215293.Winding.internet.LyricsLoadTask;
+import br.unicamp.ft.e215293.Winding.internet.ReceiveJSON;
 import br.unicamp.ft.e215293.Winding.music.Music;
 import br.unicamp.ft.e215293.Winding.music.MusicFav;
 
@@ -36,13 +37,14 @@ import br.unicamp.ft.e215293.Winding.music.MusicFav;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MusicSelectedFragment extends Fragment {
+public class MusicSelectedFragment extends Fragment implements JSONReceiver {
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private View view;
     private Music music;
     private DatabaseReference mDatabaseReference;
+    private Bundle bundle = new Bundle();
 
     public MusicSelectedFragment() {
         // Required empty public constructor
@@ -61,8 +63,15 @@ public class MusicSelectedFragment extends Fragment {
         TextView textViewLet = (TextView) view.findViewById(R.id.nome_letra);
         new ImageLoadTask(music.getSongArt(), imageView).execute();
 
-        textViewNome.setText(music.getNome());
-        textViewArt.setText(music.getArtista());
+        textViewNome.setText(music.getNomeMusica());
+        textViewArt.setText(music.getNomeArtista());
+        textViewArt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //criar artista
+                makeACall(music.getIdArtista());
+            }
+        });
         new LyricsLoadTask(music.getLetra(), textViewLet).execute();
         return view;
     }
@@ -125,5 +134,56 @@ public class MusicSelectedFragment extends Fragment {
 
             }
         });
+    }
+
+    private void makeACall(int data) {
+        System.out.println("*************" + data + "*****************");
+        String url = "https://api.genius.com/artists/" + data + "?&access_token=MaALaMqzcduGO5dzRrkDUQei8E-rbz2BKNeHhszXdgJbZHzat9IVBbisjWjU8h4n";
+        new ReceiveJSON(MusicSelectedFragment.this).execute(url);
+    }
+
+    @Override
+    public void receiveJSON(JSONObject jsonObject) {
+        try {
+            JSONObject response = new JSONObject(jsonObject.getString("response"));
+
+            JSONObject artist = new JSONObject(response.getString("artist"));
+
+            int idArtista = artist.getInt("id");
+            String nomeArtista = artist.getString("name");
+            String artArtista = artist.getString("image_url");
+
+            JSONObject description = new JSONObject(artist.getString("description"));
+            JSONObject dom = new JSONObject(description.getString("dom"));
+            JSONArray children1 = dom.getJSONArray("children");
+            JSONObject children2 = new JSONObject(children1.getString(0));
+            JSONArray children3 = new JSONArray(children2.getString("children"));
+            String desc = children2.toString();
+            String descArtista = "";
+            desc = desc.replace("{", "¨");
+            desc = desc.replace("}", "¨");
+            desc = desc.replace("[", "¨");
+            desc = desc.replace("]", "¨");
+            String[] parts = desc.split("¨");
+            for (String i : parts) {
+                System.out.println(i+"*****");
+                if (!i.contains("\"tag\"")&&!i.contains("\"children\"")&&!i.contains("http")&&!i.contains("data\":")&&!i.contains("api_path")) {
+                    descArtista += i;
+                }
+            }
+            descArtista = descArtista.replace(",\"","");
+            descArtista = descArtista.replace("\",","");
+            descArtista = descArtista.replace("\"","");
+            descArtista = descArtista.replace("\\","");
+
+            Artist artista = new Artist(idArtista, nomeArtista, artArtista, descArtista);
+            bundle.putSerializable("artist", artista);
+            bundle.putInt("origin",1);
+            NavController navController = NavHostFragment.findNavController(MusicSelectedFragment.this);
+            navController.navigate(R.id.arestaMA, bundle);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

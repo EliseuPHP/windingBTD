@@ -19,16 +19,21 @@
     <string name="texto_track">%d</string>
     <string name="texto_gen">%s</string>
     <string name="music">Musicas</string>
-    <string name="artist">Artistas</string>
+    <string name="artist">Artista</string>
     <string name="btn_search">Buscar</string>
     <string name="search">Buscar</string>
     <string name="Loading">Carregando…</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="sign_in">Sign-In</string>
-    <string name="create_account">Create Account</string>
-    <string name="logout">Log Out</string>
-    <string name="login">Log In</string>
-    <string name="favorites">Favorites</string>
+    <string name="create_account">Criar Conta</string>
+    <string name="logout">Sair</string>
+    <string name="login">Entrar</string>
+    <string name="favorites">Favoritos</string>
+    <string name="no_fav">Você não tem favoritos ainda :(</string>
+    <string name="welcome">Bem Vindo</string>
+    <string name="welcomeBack">Bem Vindo de Volta,</string>
+    <string name="popular">Músicas Populares de %s</string>
+    <string name="please">Please</string>
     <!--    test-->
 </resources>
